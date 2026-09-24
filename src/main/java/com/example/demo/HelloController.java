@@ -1,23 +1,31 @@
 package com.example.demo;
 
-import javafx.event.ActionEvent;
+import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
+import java.util.*;
 
 public class HelloController {
 
     @FXML
-    private Label helloThere;
+    private Circle mainObject;
 
+    //translate object
     @FXML
-    private TextField nameField;
+    public void initialize() {
+        //move object point list
+        ArrayList<Coordinate> pointsList = new ArrayList<>();
 
-    @FXML
-    private void handleNameInput(ActionEvent event) {
-        String userInput = nameField.getText();
-        if (!userInput.isEmpty()) {
-            helloThere.setText(userInput + "? Your parents hate you or something? I mean that is a terrible name.");
+        //move object
+        for (Coordinate point : pointsList) {
+            TranslateTransition translate = new TranslateTransition(Duration.seconds(2), mainObject);
+
+            translate.setToX(point.getX());
+            translate.setToY(point.getY());
+
+            translate.play();
         }
     }
 }

@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
 
-<VBox alignment="TOP_LEFT" spacing="12.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.demo.HelloController">
-    <padding>
-        <Insets bottom="24.0" left="24.0" right="24.0" top="24.0"/>
-    </padding>
-
-    <Label fx:id="helloThere" text="Hello There!"/>
-    <TextField fx:id="nameField"/>
-    <Button text="Submit" onAction="#handleNameInput"/>
-</VBox>
+<Pane xmlns:fx="http://javafx.com" fx:controller="com.example.demo.HelloController">
+    <Circle fx:id="mainObject" radius="10" fill="Blue" layoutX="10" layoutY="10"/>
+</Pane>
