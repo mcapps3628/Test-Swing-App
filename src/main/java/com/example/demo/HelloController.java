@@ -2,7 +2,6 @@ package com.example.demo;
 
 import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
