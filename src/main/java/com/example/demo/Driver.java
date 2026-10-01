@@ -1,107 +1,78 @@
+// Driver object class
+// Floats for stats should be in the range of 0-1
+// (unless specifically  said)
+
 package com.example.demo;
 
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
-import javafx.scene.control.Label;
-import javafx.scene.shape.Circle;
-import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
-import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import java.time.Duration;
 
 public class Driver {
 
-    String name; //ex. "Lewis Hamilton"
-    String nickname; //ex. "HAM"
+    //DRIVER STATS
+    private String name;
+    private String nameAbbr;
 
-    float braking; //ex. 0.9
-    float acceleration; //ex. 0.8
-    float cornering;
-    float consistency; //ex. 0.9
-    int attacking; //ex. 60
-    float defending; //ex. 0.21
+    private float attacking;
+    private float defending;
+    private float consistency;
+    private float braking;
+    private float cornering;
 
-    int engineMode; //0-2, zero is conserve mode
-    int paceMode;
+    //CAR STATS
+    private float enginePower;
+    private float downforce;
+    private float handling;
+    private float weight;
 
-    String tire;
-    String tireDeg;
+    private float tireDegradation; // Higher is better
+    private float fuelEfficiency;
 
-    Group driverMarker = new Group(); //driver marker group
+    //DYNAMIC VALUES
+    private String tire; //EX. SOFT
+    private String paceMode; //EX. FAST
+    private String engineMode;
 
-    // Function Construction
-    public Driver(String name, String nickname, float braking, float acceleration, float cornering, float consistency, int attacking,
-                  float defending, int engineMode, int paceMode, Pane pane, List<Coordinate> pointsList) {
+    private float tirePercent;
+    private float fuelPercent;
+
+    //DRIVER UI TODO: Finish driver UI
+
+    public Driver(String name, String nameAbbr) {
         this.name = name;
-        this.nickname = nickname;
-        this.braking = braking;
-        this.acceleration = acceleration;
-        this.cornering = cornering;
-        this.consistency = consistency;
-        this.attacking = attacking;
-        this.defending = defending;
-        this.engineMode = engineMode;
-        this.paceMode = paceMode;
+        this.nameAbbr = nameAbbr;
+
+        //TODO: Finish constructor logic here
     }
 
-    // Set up marker object
-    public void addObject(Pane pane) {
-        Circle circle = new Circle(10, 10, 10);
-        Label label = new Label();
+    //PUBLIC METHODS
 
-        driverMarker.getChildren().addAll(circle, label);
-    }
-
-    // Move marker to new point
-    public void moveMarker(Coordinate point, Duration time /* in seconds */) {
-        TranslateTransition translate = new TranslateTransition(time, driverMarker);
-
+    public void moveDriver(Coordinate point, Duration time /*In Seconds*/, Group driverObject) {
+        TranslateTransition translate = new TranslateTransition(javafx.util.Duration.seconds(0.5), driverObject);
         translate.setToX(point.getX());
         translate.setToY(point.getY());
-
         translate.setInterpolator(Interpolator.LINEAR);
-
         translate.play();
     }
 
-    // Try overtake
-    public boolean tryOvertake() {
-        return false; //TODO: FINISH
+    public void tryOvertake() {
+        //TODO: FINISH tryOvertake
     }
 
-    // Calculate sector
-    private float calculateSectorTime(float accelerationPrioritySector, float brakingPrioritySector, float corneringPrioritySector, float baseTime) {
-        float accelerationPenalty = (1 - acceleration) * accelerationPrioritySector + randomModifier();
-        float brakingPenalty = (1 - braking) * brakingPrioritySector + randomModifier();
-        float corneringPenalty = (1 - cornering) * corneringPrioritySector + randomModifier();
+    //SET DYNAMIC VARIABLE METHODS
 
-        return baseTime + accelerationPenalty + brakingPenalty + corneringPenalty;
+    public void setPaceMode(String pace) {
+        paceMode = pace;
     }
 
-    // Calculate lap time
-    public float calculateLap(float sector1A, float sector1B, float sector1C, float sector2A, float sector2B, float sector2C,
-                              float sector3A, float sector3B, float sector3C, float sector1Time, float sector2Time, float sector3Time) {
-        return calculateSectorTime(sector1A, sector1B, sector1C, sector1Time) + calculateSectorTime(sector2A, sector2B, sector2C, sector2Time)
-                + calculateSectorTime(sector3A, sector3B, sector3C, sector3Time);
+    public void setEngineMode(String mode) {
+        engineMode = mode;
     }
 
-    // Set tire type
     public void setTire(String tireType) {
         tire = tireType;
-    }
-
-    // Random modifier for calculating a sector
-    private float randomModifier() {
-        // Generates a random double between -1.0 (inclusive) and 1.0 (exclusive)
-        double randomValue = ThreadLocalRandom.current().nextDouble(-1.0, 1.0);
-
-        if (randomValue < 0) {
-            return (float) Math.min(0, randomValue + consistency);
-        } else {
-            return (float) Math.max(0, randomValue - consistency);
-        }
     }
 }
