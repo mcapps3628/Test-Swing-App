@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eec51d9c-c69e-4e02-a87d-4686c5941757" name="Changes" comment="Unfinished Driver class.">
+    <list default="true" id="eec51d9c-c69e-4e02-a87d-4686c5941757" name="Changes" comment="Updates on Driver class.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/Driver.java" afterDir="false" />
     </list>
@@ -108,7 +108,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Point-to-Point movement and coordinate object." />
     <MESSAGE value="Unfinished Driver class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Unfinished Driver class." />
+    <MESSAGE value="Updates on Driver class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates on Driver class." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

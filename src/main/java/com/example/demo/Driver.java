@@ -75,4 +75,47 @@ public class Driver {
     public void setTire(String tireType) {
         tire = tireType;
     }
+
+    //SET STATIC VARIABLE METHODS
+
+    public void setDriverStats(float attacking, float defending, float consistency,
+                               float braking, float cornering) {
+        this.attacking = attacking;
+        this.defending = defending;
+        this.consistency = consistency;
+        this.braking = braking;
+        this.cornering = cornering;
+    }
+
+    private void setCarStats(float enginePower, float downforce, float handling, float weight,
+                             float tireDegradation, float fuelEfficiency) {
+        this.enginePower = enginePower;
+        this.downforce = downforce;
+        this.handling = handling;
+        this.weight = weight;
+        this.tireDegradation = tireDegradation;
+        this.fuelEfficiency = fuelEfficiency;
+    }
+
+    //PRIVATE HELPER FUNCTIONS
+
+    private float calculateSector(float corneringPriority, float brakingPriority, float speedPriority, float baseTime) {
+        float corneringPenalty = mathAverage2((1 - cornering), (1 - downforce)) * corneringPriority + randModifier();
+        float brakingPenalty = mathAverage2((1 - braking), (1 - handling)) * brakingPriority + randModifier();
+        float speedPenalty = (1 - enginePower) * speedPriority + randModifier();
+
+        return baseTime + corneringPenalty + brakingPenalty + speedPenalty;
+    }
+
+    private float mathAverage2(float value1, float value2) {
+        return (value1 + value2) / 2;
+    }
+
+    private float randModifier() {
+        float randValue = (float) Math.random() * 0.5f - 0.5f;
+        if (randValue < 0) {
+            return Math.min(randValue + (consistency / 2), 0);
+        }
+        return randValue;
+    }
 }
